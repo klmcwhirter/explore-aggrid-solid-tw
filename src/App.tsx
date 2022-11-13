@@ -52,11 +52,11 @@ const App: Component = () => {
   const columnDefs: ColGroupDef<OlympicWinner>[] = [
     {
       headerName: 'Event Details',
-      headerClass: 'bg-gradient-to-r from-blue-200',
+      headerClass: 'bg-gradient-to-r from-blue-200 to-green-300',
       children: [
         { field: 'year', headerClass: 'bg-gradient-to-r from-blue-200 to-blue-100' },
         {
-          field: 'date', headerClass: 'bg-gradient-to-r from-blue-100',
+          field: 'date', headerClass: 'bg-gradient-to-r from-blue-100 to-green-300',
           filter: 'agDateColumnFilter',
           filterParams: {
             comparator: (filterLocalDateAtMidnight: Date, cellValue: string): number => {
@@ -78,22 +78,22 @@ const App: Component = () => {
     },
     {
       headerName: 'Athlete Details',
-      headerClass: 'bg-gradient-to-r from-green-300',
+      headerClass: 'bg-gradient-to-r from-green-300 to-green-10',
       children: [
         { field: 'athlete', headerClass: 'bg-gradient-to-r from-green-300 to-green-200' },
-        { field: 'age', headerClass: 'bg-gradient-to-r from-green-200 to-green-100', filter: 'agNumberColumnFilter' },
-        { field: 'country', headerClass: 'bg-gradient-to-r from-green-100' },
+        { field: 'age', width: 120, headerClass: 'bg-gradient-to-r from-green-200 to-green-100', filter: 'agNumberColumnFilter' },
+        { field: 'country', headerClass: 'bg-gradient-to-r from-green-100 to-green-10' },
       ] as ColDef<OlympicWinner>[]
     },
     {
       headerName: 'Sport Results',
-      headerClass: 'bg-gradient-to-r from-orange-500 via-orange-200 to-transparent',
+      headerClass: 'bg-orange-100',
       children: [
-        { field: 'sport', headerClass: 'bg-gradient-to-r from-orange-500 to-orange-400' },
-        { field: 'gold', headerClass: 'bg-gradient-to-r from-orange-400 to-orange-300' },
-        { field: 'silver', headerClass: 'bg-gradient-to-r from-orange-300 to-orange-200' },
-        { field: 'bronze', headerClass: 'bg-gradient-to-r from-orange-200 to-orange-100' },
-        { field: 'total', headerClass: 'bg-gradient-to-r from-orange-100' }
+        { field: 'sport', headerClass: 'bg-orange-100' },
+        { field: 'gold', headerClass: 'bg-[#FFD700]' },
+        { field: 'silver', headerClass: 'bg-gray-300' },
+        { field: 'bronze', headerClass: 'bg-[#8C7853]' },
+        { field: 'total' }
       ] as ColDef<OlympicWinner>[]
     }
   ];
@@ -116,6 +116,17 @@ const App: Component = () => {
   const onClear = () => {
     gridRef().api.setFilterModel(null)
     gridRef().columnApi.applyColumnState({
+      state: [
+        { colId: 'year', width: 150 },
+        { colId: 'athlete', width: 150 },
+        { colId: 'age', width: 120 },
+        { colId: 'country', width: 150 },
+        { colId: 'sport', width: 150 },
+        { colId: 'gold', width: 150 },
+        { colId: 'silver', width: 150 },
+        { colId: 'bronze', width: 150 },
+        { colId: 'total', width: 150 },
+      ],
       defaultState: { sort: null },
     });
   };
@@ -143,6 +154,7 @@ const App: Component = () => {
         { colId: 'athlete', width: 200, sort: "asc", sortIndex: 2 },
         { colId: 'age', width: 100 },
         { colId: 'country', width: 200 },
+        { colId: 'sport', width: 200 },
         { colId: 'gold', width: 100 },
         { colId: 'silver', width: 100 },
         { colId: 'bronze', width: 100 },
@@ -170,6 +182,7 @@ const App: Component = () => {
         { colId: 'athlete', width: 200, sort: "desc", sortIndex: 2 },
         { colId: 'age', width: 100 },
         { colId: 'country', width: 200 },
+        { colId: 'sport', width: 200 },
         { colId: 'gold', width: 100 },
         { colId: 'silver', width: 100 },
         { colId: 'bronze', width: 100 },
@@ -200,10 +213,10 @@ const App: Component = () => {
       </div>
       <div class="m-2 h-2">
         <span class="p-2 bg-blue-700 text-white rounded-lg">{rowCount()} rows</span>
-        <button type="button" class="ml-2 p-2 bg-green-100 hover:bg-green-300 rounded-lg" onClick={onBtnUpdate}>Export</button>
-        <button type="button" class="ml-2 p-2 bg-green-100 hover:bg-green-300 rounded-lg" onClick={onClear}>Clear</button>
-        <button type="button" class="ml-2 p-2 bg-green-100 hover:bg-green-300 rounded-lg" onClick={onLogState}>Log</button>
-        <button type="button" class="ml-2 p-2 bg-green-100 hover:bg-green-300 rounded-lg" onClick={onRestoreFromPreset1}>Preset 1</button>
+        <button type="button" class="ml-2 p-2 bg-indigo-100 hover:bg-indigo-300 rounded-lg" onClick={onBtnUpdate}>Export</button>
+        <button type="button" class="ml-2 p-2 bg-gray-100 hover:bg-gray-300 rounded-lg" onClick={onClear}>Clear</button>
+        <button type="button" class="ml-2 p-2 bg-purple-100 hover:bg-purple-300 rounded-lg" onClick={onLogState}>Log</button>
+        <button type="button" class="ml-2 p-2 bg-blue-100 hover:bg-blue-300 rounded-lg" onClick={onRestoreFromPreset1}>Preset 1</button>
         <button type="button" class="ml-2 p-2 bg-green-100 hover:bg-green-300 rounded-lg" onClick={onRestoreFromPreset2}>Preset 2</button>
       </div>
     </>
