@@ -1,9 +1,11 @@
 import { Component, createResource, createSignal } from 'solid-js';
 
 import AgGridSolid, { AgGridSolidRef } from 'ag-grid-solid';
+import { ApplyColumnStateParams, ColDef, ColGroupDef, CsvExportParams } from 'ag-grid-community';
+import 'ag-grid-enterprise';
+
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { ApplyColumnStateParams, ColDef, ColGroupDef, CsvExportParams, ICombinedSimpleModel } from 'ag-grid-community';
 
 
 function assureQuotes(cell: string): string {
@@ -54,7 +56,8 @@ const App: Component = () => {
       headerName: 'Event Details',
       headerClass: 'bg-gradient-to-r from-blue-200 to-green-300',
       children: [
-        { field: 'year', headerClass: 'bg-gradient-to-r from-blue-200 to-blue-100' },
+        // set filter is an enterprise feature
+        { field: 'year', headerClass: 'bg-gradient-to-r from-blue-200 to-blue-100', filter: 'agSetColumnFilter' },
         {
           field: 'date', headerClass: 'bg-gradient-to-r from-blue-100 to-green-300',
           filter: 'agDateColumnFilter',
@@ -80,20 +83,20 @@ const App: Component = () => {
       headerName: 'Athlete Details',
       headerClass: 'bg-gradient-to-r from-green-300 to-green-10',
       children: [
-        { field: 'athlete', headerClass: 'bg-gradient-to-r from-green-300 to-green-200' },
+        { field: 'athlete', headerClass: 'bg-gradient-to-r from-green-300 to-green-200', filter: 'agTextColumnFilter' },
         { field: 'age', width: 120, headerClass: 'bg-gradient-to-r from-green-200 to-green-100', filter: 'agNumberColumnFilter' },
-        { field: 'country', headerClass: 'bg-gradient-to-r from-green-100 to-green-10' },
+        { field: 'country', headerClass: 'bg-gradient-to-r from-green-100 to-green-10', filter: 'agTextColumnFilter' },
       ] as ColDef<OlympicWinner>[]
     },
     {
       headerName: 'Sport Results',
       headerClass: 'bg-orange-100',
       children: [
-        { field: 'sport', headerClass: 'bg-orange-100' },
-        { field: 'gold', headerClass: 'bg-[#FFD700]' },
-        { field: 'silver', headerClass: 'bg-gray-300' },
-        { field: 'bronze', headerClass: 'bg-[#8C7853]' },
-        { field: 'total' }
+        { field: 'sport', headerClass: 'bg-orange-100', filter: 'agTextColumnFilter' },
+        { field: 'gold', headerClass: 'bg-[#FFD700]', filter: 'agNumberColumnFilter' },
+        { field: 'silver', headerClass: 'bg-gray-300', filter: 'agNumberColumnFilter' },
+        { field: 'bronze', headerClass: 'bg-[#8C7853]', filter: 'agNumberColumnFilter' },
+        { field: 'total', headerClass: 'bg-orange-100', filter: 'agNumberColumnFilter' }
       ] as ColDef<OlympicWinner>[]
     }
   ];
@@ -103,7 +106,6 @@ const App: Component = () => {
     // flex: 1,
     resizable: true,
     sortable: true,
-    filter: true,
     floatingFilter: true
   };
 
@@ -138,13 +140,14 @@ const App: Component = () => {
 
   const onRestoreFromPreset1 = () => {
     const filter = {
+      // set filter is an enterprise feature
+      year: { type: 'set', values: ['2008', '2012'] },
       country: {
         type: 'contains',
         filter: 'united states'
       },
       age: { type: 'lessThan', filter: '30' },
       sport: { type: 'startsWith', filter: 'swim' },
-      date: { type: 'inRange', dateFrom: '2008-01-01', dateTo: '2012-12-31' },
     };
     gridRef().api.setFilterModel(filter);
 
