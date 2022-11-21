@@ -1,4 +1,5 @@
-import { Component, createResource, createSignal } from 'solid-js';
+import { Accessor, Component, createSignal } from 'solid-js';
+import { useRouteData } from '@solidjs/router';
 
 import AgGridSolid, { AgGridSolidRef } from 'ag-grid-solid';
 import { ApplyColumnStateParams, ColDef, ColGroupDef, CsvExportParams } from 'ag-grid-community';
@@ -7,6 +8,7 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+import { OlympicWinner } from './olymicwinners';
 
 function assureQuotes(cell: string): string {
   let rc = cell;
@@ -25,29 +27,14 @@ function assureQuotesInLines(csv: string): string {
   return rc;
 }
 
-const fetchData = async () => (await fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')).json();
-
 function formattedDate(date: string): string {
   const [day, month, year] = date.split('/');
   const rc = `${year}-${month}-${day}`;
   return rc;
 }
 
-interface OlympicWinner {
-  athlete: string,
-  age: number,
-  country: string,
-  year: string,
-  date: string,
-  sport: string,
-  gold: number,
-  silver: number,
-  bronze: number,
-  total: number
-};
-
 const aggrid: Component = () => {
-  const [rowData] = createResource(fetchData, { deferStream: true });
+  const rowData = useRouteData<Accessor<any>>();
   const [gridRef, setGridRef] = createSignal<AgGridSolidRef>(undefined);
   const [rowCount, setRowCount] = createSignal(0);
 
