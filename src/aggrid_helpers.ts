@@ -13,8 +13,8 @@ export function formattedDate(date: string): string {
     const [day, month, year] = date.split('/');
     const rc = `${year}-${month}-${day}`;
     return rc;
-  }
-  
+}
+
 export const columnDefs: ColGroupDef<OlympicWinner>[] = [
     {
         headerName: 'Event Details',
@@ -67,19 +67,23 @@ export const columnDefs: ColGroupDef<OlympicWinner>[] = [
 
 export const defaultColDef: ColDef<OlympicWinner> = {
     width: 150,
-    // flex: 1,
     resizable: true,
     sortable: true,
     floatingFilter: true
 };
 
-export const onBtnUpdate = (gridRef: AgGridSolidRef) => {
+export const onBtnUpdate = (gridRef: AgGridSolidRef): void => {
     (document.querySelector(
         '#csvResult'
-    ) as any).value = assureQuotesInLines(gridRef.api.getDataAsCsv({ suppressQuotes: true, skipColumnGroupHeaders: true } as CsvExportParams));
+    ) as any).value = assureQuotesInLines(
+        gridRef.api.getDataAsCsv({
+            suppressQuotes: true,
+            skipColumnGroupHeaders: true
+        } as CsvExportParams)
+    );
 };
 
-export const onClear = (gridRef: AgGridSolidRef) => {
+export const onClear = (gridRef: AgGridSolidRef): void => {
     (document.querySelector('#csvResult') as any).value = '';
     gridRef.api.setFilterModel(null);
     gridRef.columnApi.applyColumnState({
@@ -99,12 +103,12 @@ export const onClear = (gridRef: AgGridSolidRef) => {
     });
 };
 
-export const onLogState = (gridRef: AgGridSolidRef) => {
+export const onLogState = (gridRef: AgGridSolidRef): void => {
     console.log('filter: ', gridRef.api.getFilterModel());
     console.log('state: ', gridRef.columnApi.getColumnState());
 };
 
-export const onRestoreFromPreset1 = (gridRef: AgGridSolidRef) => {
+export const onRestoreFromPreset1 = (gridRef: AgGridSolidRef):void => {
     const filter = {
         // set filter is an enterprise feature
         year: { type: 'set', values: ['2008', '2012'] },
@@ -135,7 +139,7 @@ export const onRestoreFromPreset1 = (gridRef: AgGridSolidRef) => {
     gridRef.columnApi.applyColumnState(presetState);
 };
 
-export const onRestoreFromPreset2 = (gridRef: AgGridSolidRef) => {
+export const onRestoreFromPreset2 = (gridRef: AgGridSolidRef):void => {
     const filter = {
         athlete: {
             condition1: { type: 'contains', filter: 'phelps' },

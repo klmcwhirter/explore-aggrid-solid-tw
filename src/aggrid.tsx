@@ -7,8 +7,8 @@ import { columnDefs, defaultColDef, onBtnUpdate, onClear, onLogState, onRestoreF
 
 const aggrid: Component = () => {
   const rowData = useRouteData<Accessor<any>>();
-  const [gridRef, setGridRef] = createSignal<AgGridSolidRef>(undefined);
   const [rowCount, setRowCount] = createSignal(0);
+  const [gridRef, setGridRef] = createSignal<AgGridSolidRef>(undefined);  
 
   return (
     <>
@@ -16,8 +16,8 @@ const aggrid: Component = () => {
         <div class="col-span-3">
           <AgGridSolid
             ref={ele => setGridRef(ele)}
-            onFirstDataRendered={evt => setRowCount(gridRef().api.getDisplayedRowCount())}
-            onFilterChanged={evt => setRowCount(gridRef().api.getDisplayedRowCount())}
+            onFirstDataRendered={() => setRowCount(gridRef().api.getDisplayedRowCount())}
+            onFilterChanged={() => setRowCount(gridRef().api.getDisplayedRowCount())}
             rowData={rowData()}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}

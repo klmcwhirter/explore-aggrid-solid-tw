@@ -20,8 +20,8 @@ const aggrid2: Component = () => {
         <div class="col-span-3">
           <AgGridSolid
             ref={gridRef} // this just feels wrong to me - nothing is assigning to gridRef that I can see ...
-            onFirstDataRendered={evt => setRowCount(gridRef.api.getDisplayedRowCount())}
-            onFilterChanged={evt => setRowCount(gridRef.api.getDisplayedRowCount())}
+            onFirstDataRendered={() => setRowCount(gridRef.api.getDisplayedRowCount())}
+            onFilterChanged={() => setRowCount(gridRef.api.getDisplayedRowCount())}
             rowData={rowData()}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
