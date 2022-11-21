@@ -131,6 +131,7 @@ const aggrid: Component = () => {
       ],
       defaultState: { sort: null },
     });
+    (document.querySelector('#csvResult') as any).value = '';
   };
 
   const onLogState = () => {
