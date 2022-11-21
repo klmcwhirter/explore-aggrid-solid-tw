@@ -199,7 +199,7 @@ const aggrid: Component = () => {
 
   return (
     <>
-      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[85vh]">
+      <div class="ag-theme-alpine grid grid-cols-4 gap-2 h-[85vh]">
         <div class="col-span-3">
           <AgGridSolid
             ref={ele => setGridRef(ele)}

@@ -203,7 +203,7 @@ const aggrid2: Component = () => {
 
   return (
     <>
-      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[85vh]">
+      <div class="ag-theme-alpine grid grid-cols-4 gap-2 h-[85vh]">
         <div class="col-span-3">
           <AgGridSolid
             ref={gridRef} // this just feels wrong to me - nothing is assigning to gridRef that I can see ...
