@@ -2,10 +2,6 @@ import { Accessor, Component, createSignal } from 'solid-js';
 import { useRouteData } from '@solidjs/router';
 
 import AgGridSolid, { AgGridSolidRef } from 'ag-grid-solid';
-import 'ag-grid-enterprise';
-
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { columnDefs, defaultColDef, onBtnUpdate, onClear, onLogState, onRestoreFromPreset1, onRestoreFromPreset2 } from './aggrid_helpers';
 

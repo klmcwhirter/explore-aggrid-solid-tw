@@ -1,5 +1,9 @@
 import { AgGridSolidRef } from "ag-grid-solid";
 import { ApplyColumnStateParams, ColDef, ColGroupDef, CsvExportParams } from "ag-grid-community";
+import 'ag-grid-enterprise';
+
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { assureQuotesInLines } from "./csv";
 import { OlympicWinner } from "./olymicwinners";
