@@ -46,7 +46,7 @@ interface OlympicWinner {
   total: number
 };
 
-const App: Component = () => {
+const aggrid: Component = () => {
   const [rowData] = createResource(fetchData, { deferStream: true });
   const [gridRef, setGridRef] = createSignal<AgGridSolidRef>(undefined);
   const [rowCount, setRowCount] = createSignal(0);
@@ -198,7 +198,7 @@ const App: Component = () => {
 
   return (
     <>
-      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[93vh]">
+      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[85vh]">
         <div class="col-span-3">
           <AgGridSolid
             ref={ele => setGridRef(ele)}
@@ -226,4 +226,4 @@ const App: Component = () => {
   );
 };
 
-export default App;
+export default aggrid;

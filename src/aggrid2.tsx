@@ -46,7 +46,7 @@ interface OlympicWinner {
   total: number
 };
 
-const App2: Component = () => {
+const aggrid2: Component = () => {
   const [rowData] = createResource(fetchData, { deferStream: true });
   const [rowCount, setRowCount] = createSignal(0);
   let gridRef: AgGridSolidRef;
@@ -111,7 +111,7 @@ const App2: Component = () => {
 
   const onBtnUpdate = () => {
     (document.querySelector(
-      '#csvResult'
+      '#csvResult2'
     ) as any).value = assureQuotesInLines(gridRef.api.getDataAsCsv({ suppressQuotes: true, skipColumnGroupHeaders: true } as CsvExportParams));
   };
 
@@ -202,7 +202,7 @@ const App2: Component = () => {
 
   return (
     <>
-      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[93vh]">
+      <div class="ag-theme-alpine grid grid grid-cols-4 gap-2 h-[85vh]">
         <div class="col-span-3">
           <AgGridSolid
             ref={gridRef} // this just feels wrong to me - nothing is assigning to gridRef that I can see ...
@@ -214,7 +214,7 @@ const App2: Component = () => {
             animateRows={true}
           />
         </div>
-        <textarea id="csvResult" class="mr-2 col-span-1 h-full border-2 border-black">
+        <textarea id="csvResult2" class="mr-2 col-span-1 h-full border-2 border-black">
           Click the Export button to view exported CSV here
         </textarea>
       </div>
@@ -229,5 +229,4 @@ const App2: Component = () => {
     </>
   );
 };
-
-export default App2;
+export default aggrid2;
