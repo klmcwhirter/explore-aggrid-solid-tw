@@ -80,17 +80,18 @@ export const onClear = (gridRef: AgGridSolidRef) => {
     gridRef.api.setFilterModel(null);
     gridRef.columnApi.applyColumnState({
         state: [
-            { colId: 'year', width: 150 },
-            { colId: 'athlete', width: 150 },
+            { colId: 'year' },
+            { colId: 'date' },
+            { colId: 'athlete' },
             { colId: 'age', width: 120 },
-            { colId: 'country', width: 150 },
-            { colId: 'sport', width: 150 },
-            { colId: 'gold', width: 150 },
-            { colId: 'silver', width: 150 },
-            { colId: 'bronze', width: 150 },
-            { colId: 'total', width: 150 },
+            { colId: 'country' },
+            { colId: 'sport' },
+            { colId: 'gold' },
+            { colId: 'silver' },
+            { colId: 'bronze' },
+            { colId: 'total' },
         ],
-        defaultState: { sort: null },
+        defaultState: { sort: null, width: 150 },
     });
 };
 
@@ -115,6 +116,7 @@ export const onRestoreFromPreset1 = (gridRef: AgGridSolidRef) => {
     const presetState: ApplyColumnStateParams = {
         state: [
             { colId: 'year', sort: "asc", sortIndex: 1 },
+            { colId: 'date', width: 180 },
             { colId: 'athlete', width: 200, sort: "asc", sortIndex: 2 },
             { colId: 'age', width: 100 },
             { colId: 'country', width: 200 },
@@ -143,6 +145,7 @@ export const onRestoreFromPreset2 = (gridRef: AgGridSolidRef) => {
     const presetState: ApplyColumnStateParams = {
         state: [
             { colId: 'year', sort: "desc", sortIndex: 0 },
+            { colId: 'date', width: 170 },
             { colId: 'athlete', width: 200, sort: "desc", sortIndex: 2 },
             { colId: 'age', width: 100 },
             { colId: 'country', width: 200 },
