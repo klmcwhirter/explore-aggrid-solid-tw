@@ -14,6 +14,8 @@ const aggrid2: Component = () => {
 
   createEffect(() => setTimeout(() => console.log('createEffect: gridRef=', gridRef)));
 
+  function onGridReady(): void { console.log('onGridReady: gridRef=', gridRef); }
+
   return (
     <>
       <div class="ag-theme-alpine grid grid-cols-4 gap-2 h-[85vh]">
@@ -22,6 +24,7 @@ const aggrid2: Component = () => {
             ref={gridRef} // this just feels wrong to me - nothing is assigning to gridRef that I can see ...
             onFirstDataRendered={() => setRowCount(gridRef.api.getDisplayedRowCount())}
             onFilterChanged={() => setRowCount(gridRef.api.getDisplayedRowCount())}
+            onGridReady={() => onGridReady()} // wasn't doing this earlier - hmmm - solid ref lifecycle knowledge gap? docs need some work it seems ...
             rowData={rowData()}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
